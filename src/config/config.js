@@ -1,7 +1,5 @@
 const dotenv = require("dotenv");
-
 dotenv.config();
-
 module.exports = {
   passport: {
     secret: process.env.secret_key,
@@ -22,4 +20,6 @@ module.exports = {
       process.env.node_environment == "prod" ? process.env.database : "dressup",
   },
   port: process.env.PORT || 3000,
+  google_client_id: process.env.GOOGLE_CLIENT_ID,
+  google_secret: process.env.GOOGLE_CLIENT_SECRET,
 };

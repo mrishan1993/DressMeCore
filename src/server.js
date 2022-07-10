@@ -1,6 +1,6 @@
 const mysql = require("mysql");
 const https = require("http");
-const { mysqlCreds, port } = require("./config");
+const { mysqlCreds, port } = require("./config/config");
 
 let db = mysql.createConnection({
   host: mysqlCreds.host,
@@ -25,18 +25,6 @@ const closeConnection = (connection) => {
   connection.end();
 };
 
-const runQuery = (connection, query) => {
-  let sql = "CREATE DATABASE nodemysql";
-
-  connection.query(sql, (err) => {
-    if (err) {
-      throw err;
-    }
-
-    console.log("Query completed");
-  });
-};
-
 const getDb = () => {
   return db;
 };
@@ -55,4 +43,4 @@ const startServer = (appObj) => {
     });
 };
 
-module.exports = { getDb, startServer, runQuery };
+module.exports = { getDb, startServer };

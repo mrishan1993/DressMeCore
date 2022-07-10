@@ -1,10 +1,11 @@
 const express = require("express");
+const passport = require("passport");
+const { isLoggedIn } = require("./auth");
 
 const router = express.Router();
 
 router.get("/one", (req, res) => {
-  console.log("inside the function");
-  res.send("this is trial of api");
+  res.send("this is trial of stylist api");
 });
 
 module.exports = { router };
