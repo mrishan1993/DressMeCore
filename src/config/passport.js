@@ -15,19 +15,19 @@ const passportFunction = () => {
       googleVerify
     )
   );
-  passport.use(
-    new AppleStrategy(
-      {
-        clientID: "",
-        teamID: "",
-        callbackURL: "",
-        keyID: "",
-        privateKeyLocation: "",
-        passReqToCallback: true,
-      },
-      appleVerify
-    )
-  );
+  // passport.use(
+  //   new AppleStrategy(
+  //     {
+  //       clientID: "",
+  //       teamID: "",
+  //       callbackURL: "",
+  //       keyID: "",
+  //       privateKeyLocation: "",
+  //       passReqToCallback: true,
+  //     },
+  //     appleVerify
+  //   )
+  // );
   passport.serializeUser(function (user, done) {
     done(null, user);
   });

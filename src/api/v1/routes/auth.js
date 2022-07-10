@@ -3,6 +3,12 @@ const express = require("express");
 
 const router = express.Router();
 
+const checkAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/auth/google");
+};
 router.get(
   "/auth/google",
   passport.authenticate("google", { scope: ["email", "profile"] })
@@ -33,13 +39,9 @@ router.post("/auth/apple/callback", (req, res, next) => {
     }
   })(req, res, next);
 });
-router.get(
-  "/protected",
-  passport.authenticate(["google", "apple"]),
-  (req, res) => {
-    res.send(`Hello ${req.user.displayName}`);
-  }
-);
+router.get("/protected", checkAuthenticated, (req, res) => {
+  res.send(`Hello ${req.user.displayName}`);
+});
 router.get("/auth/failure", (req, res) => {
   res.send("Failed to authenticate..");
 });
@@ -53,4 +55,4 @@ router.get("/logout", (req, res, next) => {
   req.session.destroy();
   res.send("Logged Out!");
 });
-module.exports = { router };
+module.exports = { router, checkAuthenticated };
