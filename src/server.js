@@ -1,36 +1,27 @@
-const mysql = require("mysql");
+const { Sequelize } = require("sequelize");
 const https = require("http");
 const { mysqlCreds, port } = require("./config/config");
 
-let db = mysql.createConnection({
-  host: mysqlCreds.host,
-  port: mysqlCreds.port,
-  user: mysqlCreds.user,
-  password: mysqlCreds.password,
-  database: mysqlCreds.database,
-});
-
-const connectToDb = (connection) => {
-  connection.connect(function (err) {
-    if (err) {
-      console.error("error connecting: " + err.stack);
-      return;
-    }
-
-    console.log("connected as id " + connection.threadId);
-  });
-};
-
-const closeConnection = (connection) => {
-  connection.end();
-};
-
-const getDb = () => {
-  return db;
-};
+const sequelize = new Sequelize(
+  mysqlCreds.database,
+  mysqlCreds.user,
+  mysqlCreds.password,
+  {
+    host: mysqlCreds.host,
+    dialect: "mysql",
+    logging: false,
+  }
+);
+sequelize.sync();
 
 const startServer = (appObj) => {
-  return Promise.resolve(connectToDb(db))
+  return Promise.resolve(sequelize.authenticate())
+    .then(() => {
+      console.log("Connection has been established successfully.");
+    })
+    .catch((error) => {
+      console.error("Unable to connect to the database:", error);
+    })
     .then(() => {
       return Promise.resolve(https.createServer(appObj).listen(port));
     })
@@ -38,9 +29,9 @@ const startServer = (appObj) => {
       console.log(`Server started on port ${port}`);
     })
     .catch((error) => {
-      closeConnection(db);
+      sequelize.close();
       console.log(error.message);
     });
 };
 
-module.exports = { getDb, startServer };
+module.exports = { startServer, sequelize };
