@@ -1,37 +1,37 @@
-const { DataTypes } = require("sequelize");
-const { sequelize } = require("../server");
-const Question = require("./question");
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../server');
+const Question = require('./question');
 
 const Option = sequelize.define(
-  "Option",
+  'Option',
   {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       autoIncrement: true,
-      primaryKey: true,
+      primaryKey: true
     },
     option: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     image: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: true
     },
     isActive: {
-      type: DataTypes.BOOLEAN,
-    },
+      type: DataTypes.BOOLEAN
+    }
   },
   {
-    modelName: "Option",
+    modelName: 'Option'
   }
 );
 
 Option.belongsTo(Question, {
-  foreignKey: "question_id",
+  foreignKey: 'question_id'
 });
 Question.hasMany(Option, {
-  foreignKey: "question_id",
+  foreignKey: 'question_id'
 });
 module.exports = Option;

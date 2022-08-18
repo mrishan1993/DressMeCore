@@ -1,24 +1,24 @@
-const { DataTypes } = require("sequelize");
-const { sequelize } = require("../server");
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../server');
 
 const Session = sequelize.define(
-  "Session",
+  'Session',
   {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       autoIncrement: true,
-      primaryKey: true,
+      primaryKey: true
     },
     access_token: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING
     },
     refresh_token: {
-      type: DataTypes.STRING,
-    },
+      type: DataTypes.STRING
+    }
   },
   {
-    modelName: "Session",
+    modelName: 'Session'
   }
 );
 

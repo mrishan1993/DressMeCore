@@ -1,25 +1,25 @@
-const { DataTypes } = require("sequelize");
-const { sequelize } = require("../server");
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../server');
 
 const ApparelType = sequelize.define(
-  "ApparelType",
+  'ApparelType',
   {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       autoIncrement: true,
-      primaryKey: true,
+      primaryKey: true
     },
     apparel_type: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     isActive: {
-      type: DataTypes.BOOLEAN,
-    },
+      type: DataTypes.BOOLEAN
+    }
   },
   {
-    modelName: "apparel_type",
+    modelName: 'apparel_type'
   }
 );
 

@@ -1,23 +1,23 @@
-const { DataTypes } = require("sequelize");
-const { sequelize } = require("../server");
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../server');
 
 const Provider = sequelize.define(
-  "Provider",
+  'Provider',
   {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       autoIncrement: true,
-      primaryKey: true,
+      primaryKey: true
     },
     provider_name: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
-    },
+      unique: true
+    }
   },
   {
-    modelName: "Provider",
+    modelName: 'Provider'
   }
 );
 

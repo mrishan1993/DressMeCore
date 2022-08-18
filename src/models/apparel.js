@@ -1,29 +1,29 @@
-const { DataTypes } = require("sequelize");
-const { sequelize } = require("../server");
-const ApparelType = require("./apparelType");
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../server');
+const ApparelType = require('./apparelType');
 
 const Apparel = sequelize.define(
-  "Apparel",
+  'Apparel',
   {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       autoIncrement: true,
-      primaryKey: true,
+      primaryKey: true
     },
     apparel_link: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     isActive: {
-      type: DataTypes.BOOLEAN,
-    },
+      type: DataTypes.BOOLEAN
+    }
   },
   {
-    modelName: "Apparel",
+    modelName: 'Apparel'
   }
 );
 Apparel.belongsTo(ApparelType, {
-  foreignKey: "apparel_type_id",
+  foreignKey: 'apparel_type_id'
 });
 module.exports = Apparel;

@@ -1,6 +1,6 @@
 const successResponse = (res, msg) => {
   const data = {
-    message: msg,
+    message: msg
   };
   return res.status(200).json(data);
 };
@@ -8,7 +8,7 @@ const successResponse = (res, msg) => {
 const successResponseWithData = (res, msg, data) => {
   const resData = {
     message: msg,
-    data,
+    data
   };
   return res.status(200).json(resData);
 };
@@ -16,25 +16,24 @@ const successResponseWithData = (res, msg, data) => {
 const ModificationResponseWithData = (res, msg, data) => {
   const resData = {
     message: msg,
-    nModified: data,
+    nModified: data
   };
   return res.status(200).json(resData);
 };
 
-const successResponseWithToken = (res, resData) => {
-  return res.status(200).json(resData);
-};
+const successResponseWithToken = (res, resData) =>
+  res.status(200).json(resData);
 
 const ErrorResponse = (res, msg) => {
   const data = {
-    message: msg,
+    message: msg
   };
   return res.status(500).json(data);
 };
 
 const notFoundResponse = (res, msg) => {
   const data = {
-    message: msg,
+    message: msg
   };
   return res.status(404).json(data);
 };
@@ -42,14 +41,14 @@ const notFoundResponse = (res, msg) => {
 const validationErrorWithData = (res, msg, data) => {
   const resData = {
     message: msg,
-    data,
+    data
   };
   return res.status(400).json(resData);
 };
 
 const unauthorizedResponse = (res, msg) => {
   const data = {
-    message: msg,
+    message: msg
   };
   return res.status(401).json(data);
 };
@@ -62,5 +61,5 @@ module.exports = {
   ErrorResponse,
   notFoundResponse,
   validationErrorWithData,
-  unauthorizedResponse,
+  unauthorizedResponse
 };

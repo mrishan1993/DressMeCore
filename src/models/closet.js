@@ -1,31 +1,31 @@
-const { DataTypes } = require("sequelize");
-const { sequelize } = require("../server");
-const Apparel = require("./apparel");
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../server');
+const Apparel = require('./apparel');
 
 const Closet = sequelize.define(
-  "Closet",
+  'Closet',
   {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       autoIncrement: true,
-      primaryKey: true,
+      primaryKey: true
     },
     isLiked: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.INTEGER
     },
     isActive: {
-      type: DataTypes.BOOLEAN,
-    },
+      type: DataTypes.BOOLEAN
+    }
   },
   {
-    modelName: "Closet",
+    modelName: 'Closet'
   }
 );
 Apparel.hasMany(Closet, {
-  foreignKey: "apparel1",
+  foreignKey: 'apparel1'
 });
 Apparel.hasMany(Closet, {
-  foreignKey: "apparel2",
+  foreignKey: 'apparel2'
 });
 module.exports = Closet;

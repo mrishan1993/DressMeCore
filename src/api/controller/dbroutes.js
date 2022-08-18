@@ -1,25 +1,25 @@
-const Option = require("../../../models/option");
-const Question = require("../../../models/question");
+const Option = require('../../models/option');
+const Question = require('../../models/question');
 
 const addQuestion = (req, res, next) => {
   const reqdata = req.body.data;
-  const questionData = reqdata.map((data) => {
-    return {
-      question: data.value,
-      isActive: 1,
-    };
-  });
+  const questionData = reqdata.map((data) => ({
+    question: data.value,
+    isActive: 1,
+    textEntry: data.textEntry
+  }));
   Promise.resolve(Question.bulkCreate(questionData))
     .then((data) => {
       const optionData = [];
       data.forEach((dt) => {
         reqdata.forEach((qdt) => {
-          if (dt.dataValues.question == qdt.value) {
+          if (dt.dataValues.question === qdt.value) {
             qdt.option.forEach((opt) => {
               optionData.push({
-                option: opt,
+                option: opt.value,
+                image: opt.link,
                 isActive: true,
-                question_id: dt.dataValues.id,
+                question_id: dt.dataValues.id
               });
             });
           }
@@ -30,7 +30,7 @@ const addQuestion = (req, res, next) => {
     })
     .then((d) => {
       console.log(d);
-      res.send("Questions and options uploaded");
+      res.send('Questions and options uploaded');
       next();
     })
     .catch((error) => {

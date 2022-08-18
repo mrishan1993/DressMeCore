@@ -1,71 +1,74 @@
-const { DataTypes } = require("sequelize");
-const { sequelize } = require("../server");
-const Answer = require("./answer");
-const Apparel = require("./apparel");
-const Closet = require("./closet");
-const Provider = require("./provider");
-const Session = require("./session");
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../server');
+const Apparel = require('./apparel');
+const Closet = require('./closet');
+const Provider = require('./provider');
+const Session = require('./session');
+
 const User = sequelize.define(
-  "User",
+  'User',
   {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       autoIncrement: true,
-      primaryKey: true,
+      primaryKey: true
     },
     profile_id: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     first_name: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     last_name: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: true
     },
     dob: {
       type: DataTypes.DATE,
-      allowNull: true,
+      allowNull: true
     },
     gender: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: true
     },
     picture: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     isActive: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.BOOLEAN
     },
+    role: {
+      type: DataTypes.STRING
+    }
   },
   {
-    modelName: "User",
+    modelName: 'User'
   }
 );
 
 User.belongsTo(Provider, {
-  foreignKey: "provider_id",
+  foreignKey: 'provider_id'
 });
 User.hasMany(Apparel, {
-  foreignKey: "user_id",
+  foreignKey: 'user_id'
 });
 User.hasMany(Closet, {
-  foreignKey: "user_id",
+  foreignKey: 'user_id'
 });
 User.hasOne(Session, {
-  foreignKey: "user_id",
+  foreignKey: 'user_id'
 });
 module.exports = User;
